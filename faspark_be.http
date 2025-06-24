@@ -1,0 +1,6 @@
+@faspark_be_HostAddress = http://localhost:5105
+
+GET {{faspark_be_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

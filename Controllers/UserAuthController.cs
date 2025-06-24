@@ -53,7 +53,7 @@ namespace faspark_be.Controllers
 
             if (user == null)
             {
-                return Unauthorized(new { message = "Username atau password salah" });
+                return new JsonResult(new { message = "Username atau password salah" }) { StatusCode = 401 };
             }
 
             var claims = new[]

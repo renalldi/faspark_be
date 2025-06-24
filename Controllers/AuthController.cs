@@ -30,9 +30,14 @@ namespace faspark_be.Controllers
                 .FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
 
             if (user == null)
-                return Unauthorized(new { message = "Username atau password salah" });
+                return StatusCode(401, new { message = "Username atau password salah" });
 
-            // Buat claims untuk user
+            if (user.Role.ToLower() != "petugas")
+            {
+                return StatusCode(403, new { message = "Hanya petugas yang boleh login." });
+            }
+
+            // claims untuk user
             var claims = new[]
             {
                 new Claim(ClaimTypes.Name, user.Username),
